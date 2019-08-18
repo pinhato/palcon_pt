@@ -14,7 +14,7 @@ To add more actions just add file to actions folder, and method on the model if 
 4. Open db name "test".
 5. Open table name "students".
 6. Add two columns: name & grade
-7. Go to xampp file in you'r computer, and put the whole project in htdocs folder. 
-8. Open the browser and enter at the url line: "127.0.0.1/palcon_pinhas_toav/actions_page.html"
+7. Go to xampp file in you'r computer, and put the whole project ("palcon_pt-master" folder) in htdocs folder. 
+8. Open the browser and enter at the url line: "127.0.0.1/palcon_pt-master/actions_page.html"
 
 You will be able to add, delete or edit users or see the students and they'r grades in a click. 
