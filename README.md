@@ -7,7 +7,7 @@ I used XAMPP with Apache server and MYSQL to store my data.
 I used rest api to build the code easier and faster to add functionalities. 
 To add more actions just add file to actions folder, and method on the model if needed. 
 
-# How to start the program it as i did: 
+# How to start the program as i did: 
 1. Open xampp control panel.
 2. Turn apache & mysql on.
 3. Check that user named "root" has no password.
