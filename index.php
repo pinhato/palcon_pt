@@ -14,16 +14,16 @@
         //The URL will be sent 
         //Explain: www.example.com/file_name.php/action_to_do 
         //action_to_do will always be at the 3rd index of $uri_segment array
-        if($uri_segments[3] == 'read'){
+        if($uri_segments[3] === 'read'){
             include_once 'actions/read.php';
         }
-        if($uri_segments[3] == 'create'){
+        if($uri_segments[3] === 'create'){
             include_once 'actions/create.php';
         }
-        if($uri_segments[3] == 'delete'){
+        if($uri_segments[3] === 'delete'){
             include_once 'actions/delete.php';
         }
-        if($uri_segments[3] == 'update'){
+        if($uri_segments[3] === 'update'){
             include_once 'actions/update.php';
         }
     }
