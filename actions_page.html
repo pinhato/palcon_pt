@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Bootstrap & Ajax to handle the request-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+<!--Load the table from the backend-->
+<body>
+<section style="text-align: center">
+    <h1>Admin Action Section</h1>
+    <form id="delete_student">
+        <div>
+          <h4>Delete student</h4>
+          <label><b>Name</b></label>
+          <input type="text" id="name_to_delete" placeholder="Enter Name">
+          <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <form id="create_student">
+            <div>
+              <h4>Create student</h4>
+              <label><b>Name</b></label>
+              <input type="text" id="name_to_insert" placeholder="Enter Name">
+              <label><b>Grade</b></label>
+              <input type="text" id="grade_to_insert" placeholder="Enter grade">
+              <button type="submit">Submit</button>
+            </div>
+    </form>
+
+    <form id="update_student">
+            <div>
+              <h4>Edit student</h4>
+              <label><b>Name</b></label>
+              <input type="text" id="name_to_edit" placeholder="Enter Name">
+              <label><b>Grade</b></label>
+              <input type="text" id="grade_to_edit" placeholder="Enter grade">
+              <button type="submit">Submit</button>
+            </div>
+    </form>
+    <div style="padding: 2% ;">
+        <button onclick="location.href = 'show_table.html'">Go to the data table</button>
+    </div>
+</section>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript"  src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript"  src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+<script>
+        //running the method dataTable which makes the table responsive
+        function make_table_res(){
+            $(document).ready(function(){
+                $('#myTable').dataTable();
+            });
+        }
+</script>
+<script>
+    //Delete student - Enter after submit at the delete_student form
+    $('#delete_student').submit(function (e) {
+        e.preventDefault();
+        //Getting the name to delete by value
+        var name = document.getElementById("name_to_delete").value;
+        //data will be the json we will send to the backend by ajax
+        var data = { name: name };
+        $.ajax({
+            type: "POST",
+            url: 'index.php/delete',
+            data: JSON.stringify(data),
+            success: function (response) {
+                //After a successfuly delete show log, and refresh the screen
+                console.log("Successfuly deleted!");
+                location.reload();
+        }})
+})
+</script>
+<script>
+        //Create student - Enter after submit at the create_student form
+        $('#create_student').submit(function (e) {
+            e.preventDefault();
+            //Getting the name & grade to insert by value
+            var name = document.getElementById("name_to_insert").value;
+            var grade = document.getElementById("grade_to_insert").value;
+            //data will be the json we will send to the backend by ajax
+            var data = { name: name , grade: grade };
+            $.ajax({
+                type: "POST",
+                url: 'index.php/create',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    //After a successfuly insert show log, and refresh the screen
+                    console.log("Successfuly deleted!");
+                    location.reload();
+            }})
+    })
+</script>
+<script>
+        //Update student - Enter after submit at the update_student form
+        $('#update_student').submit(function (e) {
+            e.preventDefault();
+            //Getting the name of the student, that we whould like to change hes grade, by value
+            var name = document.getElementById("name_to_edit").value;
+            var grade = document.getElementById("grade_to_edit").value;
+            //data will be the json we will send to the backend by ajax
+            var data = { name: name , grade: grade };
+            $.ajax({
+                type: "POST",
+                url: 'index.php/update',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    //After a successfuly change show log, and refresh the screen
+                    console.log("Successfuly updated!");
+                    location.reload();
+            }})
+    })
+    </script>
+</body>
+</html>

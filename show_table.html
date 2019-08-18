@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Bootstrap & Ajax to handle the request-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+<!--Load the table from the backend-->
+<body onload="load_table()">
+
+    <!--A responsive table with seach, sort, and paging options-->
+    <div class="table-responsive">
+    <table id="myTable" class="display table" width="100%">
+        <thead>  
+          <tr>  
+            <th>Name</th>  
+            <th>Grade</th>  
+          </tr>  
+        </thead> 
+        <tbody id="table_data"> 
+        </tbody>  
+    </table>
+    </div>
+    <div style="padding: 2%; text-align: center;">
+        <button onclick="location.href = 'actions_page.html'">Go to the actions page</button>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript"  src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript"  src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+    //The load table function, happened on load
+    function load_table(){
+        //Getting the information by Ajax call
+        $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: 'index.php/read',
+                success: function (response) {
+                    //table_data holds the data that comes from the server
+                    table_data = response['data'];
+
+                    //Preparing the data to load dynamicaly into the html file
+                    const tableBody = document.getElementById('table_data');
+                    let dataHtml = '';
+                    
+                    //Copy each element in the data that comes from the server
+                    for (let i = 0 ; i < table_data.length ; i++){
+                        dataHtml += '<tr><td>' + table_data[i]['name'] + '</td><td>' + table_data[i]['grade'] + '</td></tr>';
+                    }
+                    
+                    //Putting the data in the html file
+                    tableBody.innerHTML = dataHtml;
+
+                    //make_table_res() running the method dataTable which makes the table responsive
+                    make_table_res();
+                }
+    })
+    }
+</script>
+<script>
+        //running the method dataTable which makes the table responsive
+        function make_table_res(){
+            $(document).ready(function(){
+                $('#myTable').dataTable();
+            });
+        }
+</script>
+</body>
+</html>
