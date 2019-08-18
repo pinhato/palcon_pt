@@ -18,7 +18,8 @@ class Students{
     public function read(){
 
         //Create a select query
-        $query = 'SELECT name, grade FROM ' . $this->table;
+        $query = 'SELECT name, grade
+                FROM ' . $this->table;
 
         //Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -40,8 +41,8 @@ class Students{
         $stmt = $this->conn->prepare($query);
 
         //Clean data for security
-        $this->name = mysql_real_escape_string($this->name);
-        $this->grade = mysql_real_escape_string($this->grade);
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->grade = htmlspecialchars(strip_tags($this->grade));
 
         //Bind data
         $stmt->bindParam(':name', $this->name);
@@ -71,8 +72,8 @@ class Students{
         $stmt = $this->conn->prepare($query);
 
         //Clean data for security
-        $this->name = mysql_real_escape_string($this->name);
-        $this->grade = mysql_real_escape_string($this->grade);
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->grade = htmlspecialchars(strip_tags($this->grade));
 
         //Bind data
         $stmt->bindParam(':grade', $this->grade);
@@ -100,7 +101,7 @@ class Students{
         $stmt = $this->conn->prepare($query);
 
         //Clean data for security
-        $this->name = mysql_real_escape_string($this->name);
+        $this->name = htmlspecialchars(strip_tags($this->name));
         
         //Bind data
         $stmt->bindParam(':name', $this->name);
